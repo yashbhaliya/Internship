@@ -1,0 +1,255 @@
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* BODY */
+body {
+    background: #f4f6f8;
+    padding: 20px;
+}
+
+/* HEADER */
+.header {
+    background: linear-gradient(135deg, #1976d2, #1565c0);
+    padding: 20px 25px;
+    border-radius: 12px;
+    margin-bottom: 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 6px 20px rgba(25, 118, 210, 0.3);
+}
+
+.header h5 {
+    color: #fff;
+    font-size: 24px;
+    font-weight: 600;
+    margin: 0;
+}
+
+/* TOP BUTTON BAR */
+.upper-btn-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #ffffff;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+/* LEFT BUTTONS */
+.left-box {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* RIGHT SEARCH */
+.right-box {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.right-box i {
+    color: rgba(255, 255, 255, 0.8);
+    margin-right: 8px;
+    font-size: 16px;
+}
+
+/* BUTTONS */
+.f-button {
+    padding: 8px 14px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.f-button.add {
+    background: #2e7d32;
+    color: #fff;
+}
+
+.f-button.clear {
+    background: #d32f2f;
+    color: #fff;
+}
+
+.f-button:hover {
+    opacity: 0.9;
+}
+
+/* SEARCH INPUT */
+#Internship {
+    padding: 10px 15px;
+    border-radius: 25px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    width: 250px;
+    font-size: 14px;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+#Internship::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+#Internship:focus {
+    border-color: #fff;
+    background: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+/* SEARCH TYPE SELECT */
+#searchType {
+    padding: 10px 15px;
+    border-radius: 25px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    font-size: 14px;
+    outline: none;
+    margin-right: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#searchType:focus {
+    border-color: #fff;
+    background: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+#searchType option {
+    background: #1976d2;
+    color: #fff;
+}
+
+/* SEARCH BUTTON */
+#searchBtn {
+    padding: 10px 20px;
+    border-radius: 25px;
+    border: none;
+    background: #fff;
+    color: #1976d2;
+    cursor: pointer;
+    font-weight: 600;
+    margin-left: 10px;
+    transition: all 0.3s ease;
+}
+
+#searchBtn:hover {
+    background: #f0f0f0;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* TABLE BOX */
+.table-box {
+    background: #fff;
+    border-radius: 8px;
+    overflow-x: auto;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+/* TABLE */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+/* TABLE HEADER */
+thead {
+    background: #1976d2;
+}
+
+thead th {
+    color: #fff;
+    padding: 12px;
+    font-size: 14px;
+    text-align: left;
+    border-right: 2px solid #1565c0;
+}
+
+/* TABLE BODY */
+tbody td {
+    padding: 10px 12px;
+    font-size: 14px;
+    border-bottom: 1px solid #eee;
+}
+
+tbody tr:hover {
+    background: #f1f7ff;
+}
+
+/* ACTION LINK */
+tbody a {
+    color: #1976d2;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+tbody a:hover {
+    text-decoration: underline;
+}
+
+/* CHECKBOX */
+#del-all-box {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .header {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+
+    .header h5 {
+        font-size: 20px;
+    }
+
+    #searchType {
+        width: 100%;
+        max-width: 200px;
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+
+    #Internship {
+        width: 100%;
+        max-width: 300px;
+    }
+
+    #searchBtn {
+        margin-left: 0;
+        margin-top: 10px;
+        width: 100%;
+        max-width: 150px;
+    }
+
+    .upper-btn-box {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .left-box {
+        width: 100%;
+        justify-content: center;
+    }
+}
