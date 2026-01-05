@@ -28,6 +28,10 @@ const internshipSchema = new mongoose.Schema({
         type: [String],
         required: true
     },
+    skills: {
+        type: [String],
+        required: true
+    },
     stipend: {
         type: String,
         required: true

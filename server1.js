@@ -27,6 +27,24 @@ app.get("/populate", async (req, res) => {
       const min = Math.min(item.salary.min, item.salary.max);
       const max = Math.max(item.salary.min, item.salary.max);
 
+      // Extract skills from job_type
+      const skills = item.job_type.filter(j =>
+        !j.includes('Stipend:') &&
+        !j.includes('Work From Home') &&
+        !j.includes('Onsite') &&
+        !j.includes('Full Time') &&
+        !j.includes('Part Time') &&
+        !j.includes('Working Days:') &&
+        !j.includes('Duration:') &&
+        !j.includes('Internship Duration:') &&
+        !j.includes('No prior experience') &&
+        !j.includes('Letter of Recommendation') &&
+        !j.includes('Certificate of Completion') &&
+        !j.includes('Flexible Hours') &&
+        !j.includes('Hybrid Working') &&
+        j.length < 20
+      );
+
       const internship = new Internship({
         id: item.id,
         title: item.title,
@@ -36,6 +54,7 @@ app.get("/populate", async (req, res) => {
           currency: item.salary.currency
         },
         job_type: item.job_type,
+        skills: skills,
         referal_link: item.referal_link
       });
 
