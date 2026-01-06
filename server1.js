@@ -44,23 +44,48 @@ app.get("/populate", async (req, res) => {
 });
 
 // DELETE an internship by MongoDB _id
-app.delete("/api/internships/:id", async (req, res) => {
+app.delete("/api/internships", async (req, res) => {
   try {
-    const Internship = require("./internship"); // Import model if not globally
-    const deleted = await Internship.findByIdAndDelete(req.params.id);
+    const { id } = req.body;  // Read id from JSON body
 
-    if (!deleted) {
+    if (!id) {
+      return res.status(400).json({ message: "ID is required" });
+    }
+
+    const Internship = require("./internship");  // Your Mongoose model
+    const deletedData = await Internship.findByIdAndDelete(id);
+
+    if (!deletedData) {
       return res.status(404).json({ message: "Internship not found" });
     }
 
     res.json({
       message: "Internship deleted successfully",
-      data: deleted
+      data: deletedData
     });
-  } catch (err) {
-    res.status(500).json({ error: err.message });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
   }
 });
+
+
+// app.delete("/api/internships/:id", async (req, res) => {
+//   try {
+//     const Internship = require("./internship"); // Import model if not globally
+//     const deleted = await Internship.findByIdAndDelete(req.params.id);
+
+//     if (!deleted) {
+//       return res.status(404).json({ message: "Internship not found" });
+//     }
+
+//     res.json({
+//       message: "Internship deleted successfully",
+//       data: deleted
+//     });
+//   } catch (err) {
+//     res.status(500).json({ error: err.message });
+//   }
+// });
 
 
 app.listen(5000, () => {
