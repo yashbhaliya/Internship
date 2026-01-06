@@ -69,41 +69,41 @@ app.delete("/api/internships", async (req, res) => {
 });
 
 // UPDATE an internship by MongoDB _id
-app.put("/api/internships/:id", async (req, res) => {
-  try {
-    let { id } = req.params; // get id from URL
-    id = id.trim(); // <-- remove whitespace/newlines
+// app.put("/api/internships/:id", async (req, res) => {
+//   try {
+//     let { id } = req.params; // get id from URL
+//     id = id.trim(); // <-- remove whitespace/newlines
 
-    const updateData = req.body;
+//     const updateData = req.body;
 
-    const mongoose = require("mongoose");
-    if (!mongoose.Types.ObjectId.isValid(id)) {
-      return res.status(400).json({ error: "Invalid ID format" });
-    }
+//     const mongoose = require("mongoose");
+//     if (!mongoose.Types.ObjectId.isValid(id)) {
+//       return res.status(400).json({ error: "Invalid ID format" });
+//     }
 
-    const Internship = require("./internship");
+//     const Internship = require("./internship");
 
-    const updatedInternship = await Internship.findByIdAndUpdate(
-      id,
-      updateData,
-      { new: true, runValidators: true }
-    );
+//     const updatedInternship = await Internship.findByIdAndUpdate(
+//       id,
+//       updateData,
+//       { new: true, runValidators: true }
+//     );
 
-    if (!updatedInternship) {
-      return res.status(404).json({ message: "Internship not found" });
-    }
+//     if (!updatedInternship) {
+//       return res.status(404).json({ message: "Internship not found" });
+//     }
 
-    res.json({
-      message: "Internship updated successfully",
-      data: updatedInternship
-    });
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-});
+//     res.json({
+//       message: "Internship updated successfully",
+//       data: updatedInternship
+//     });
+//   } catch (error) {
+//     res.status(500).json({ error: error.message });
+//   }
+// });
 
 
-
+app.use("/api/internships", require("./internship_routes"));
 
 app.listen(5000, () => {
   console.log("Server running on http://localhost:5000");
