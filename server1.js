@@ -43,6 +43,26 @@ app.get("/populate", async (req, res) => {
   }
 });
 
+// DELETE an internship by MongoDB _id
+app.delete("/api/internships/:id", async (req, res) => {
+  try {
+    const Internship = require("./internship"); // Import model if not globally
+    const deleted = await Internship.findByIdAndDelete(req.params.id);
+
+    if (!deleted) {
+      return res.status(404).json({ message: "Internship not found" });
+    }
+
+    res.json({
+      message: "Internship deleted successfully",
+      data: deleted
+    });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+
 app.listen(5000, () => {
   console.log("Server running on http://localhost:5000");
 });
