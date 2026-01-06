@@ -71,20 +71,22 @@ app.delete("/api/internships", async (req, res) => {
 // UPDATE an internship by MongoDB _id
 app.put("/api/internships/:id", async (req, res) => {
   try {
-    const { id } = req.params; // get id from URL
-    const updateData = req.body; // data to update (JSON body)
+    let { id } = req.params; // get id from URL
+    id = id.trim(); // <-- remove whitespace/newlines
 
-    if (!id) {
-      return res.status(400).json({ message: "ID is required" });
+    const updateData = req.body;
+
+    const mongoose = require("mongoose");
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({ error: "Invalid ID format" });
     }
 
     const Internship = require("./internship");
 
-    // Find by ID and update
     const updatedInternship = await Internship.findByIdAndUpdate(
       id,
       updateData,
-      { new: true, runValidators: true } // return updated doc & validate
+      { new: true, runValidators: true }
     );
 
     if (!updatedInternship) {
@@ -99,6 +101,7 @@ app.put("/api/internships/:id", async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
+
 
 
 
