@@ -68,24 +68,38 @@ app.delete("/api/internships", async (req, res) => {
   }
 });
 
+// UPDATE an internship by MongoDB _id
+app.put("/api/internships/:id", async (req, res) => {
+  try {
+    const { id } = req.params; // get id from URL
+    const updateData = req.body; // data to update (JSON body)
 
-// app.delete("/api/internships/:id", async (req, res) => {
-//   try {
-//     const Internship = require("./internship"); // Import model if not globally
-//     const deleted = await Internship.findByIdAndDelete(req.params.id);
+    if (!id) {
+      return res.status(400).json({ message: "ID is required" });
+    }
 
-//     if (!deleted) {
-//       return res.status(404).json({ message: "Internship not found" });
-//     }
+    const Internship = require("./internship");
 
-//     res.json({
-//       message: "Internship deleted successfully",
-//       data: deleted
-//     });
-//   } catch (err) {
-//     res.status(500).json({ error: err.message });
-//   }
-// });
+    // Find by ID and update
+    const updatedInternship = await Internship.findByIdAndUpdate(
+      id,
+      updateData,
+      { new: true, runValidators: true } // return updated doc & validate
+    );
+
+    if (!updatedInternship) {
+      return res.status(404).json({ message: "Internship not found" });
+    }
+
+    res.json({
+      message: "Internship updated successfully",
+      data: updatedInternship
+    });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
 
 
 app.listen(5000, () => {
